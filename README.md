@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/hero.png" alt="Clawtex" width="100%" />
-</p>
-
 <h1 align="center">Clawtex</h1>
 <p align="center"><strong>Structured memory for AI agents. Your agent remembers everything.</strong></p>
 
@@ -10,6 +6,10 @@
 </p>
 
 ---
+
+<p align="center">
+  <img src="assets/hero.png" alt="Clawtex" width="100%" />
+</p>
 
 Every AI agent session starts from zero. Context gets lost. Decisions get repeated. Lessons never stick.
 
