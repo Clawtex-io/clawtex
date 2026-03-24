@@ -28,7 +28,7 @@ The universal context endpoint. Returns a plain text block with everything your 
 curl -s -H "Authorization: Bearer tkr_..." https://clawtex.io/api/bootstrap
 ```
 
-**Response:** `text/plain` — designed to be read directly by your agent.
+**Response:** `text/plain` - designed to be read directly by your agent.
 
 ---
 
@@ -73,8 +73,8 @@ curl -s -X POST https://clawtex.io/api/state/clients \
 ```
 
 **Fields:**
-- `id` (required) — Unique identifier within the type. Lowercase, hyphenated.
-- `data` (required) — Any JSON object. No predefined schema.
+- `id` (required) - Unique identifier within the type. Lowercase, hyphenated.
+- `data` (required) - Any JSON object. No predefined schema.
 
 Types are created automatically the first time you write to them.
 
@@ -85,10 +85,10 @@ Types are created automatically the first time you write to them.
 Returns events for the authenticated user.
 
 **Query parameters:**
-- `days` — Number of days to look back (default: 7, free tier max: 7)
-- `type` — Filter by event type
-- `limit` — Maximum events to return (default: 50)
-- `offset` — Pagination offset
+- `days` - Number of days to look back (default: 7, free tier max: 14)
+- `type` - Filter by event type
+- `limit` - Maximum events to return (default: 50)
+- `offset` - Pagination offset
 
 ```bash
 curl -s -H "Authorization: Bearer tkr_..." "https://clawtex.io/api/events?days=7&limit=50"
@@ -112,12 +112,12 @@ curl -s -X POST https://clawtex.io/api/events \
 ```
 
 **Fields:**
-- `type` (required) — One of: `decision`, `milestone`, `blocker`, `task`, `note`, `deploy`, `contact`
-- `summary` (required) — One sentence description
-- `entity` (optional) — Entity reference in `type/id` format (e.g. `project/my-app`, `client/acme-corp`)
-- `date` (optional) — ISO date string. Defaults to now.
-- `time` (optional) — HH:MM format. Defaults to now.
-- `agent` (optional) — Agent name for multi-agent attribution (Team tier).
+- `type` (required) - One of: `decision`, `milestone`, `blocker`, `task`, `note`, `deploy`, `contact`
+- `summary` (required) - One sentence description
+- `entity` (optional) - Entity reference in `type/id` format (e.g. `project/my-app`, `client/acme-corp`)
+- `date` (optional) - ISO date string. Defaults to now.
+- `time` (optional) - HH:MM format. Defaults to now.
+- `agent` (optional) - Agent name for multi-agent attribution (Team tier).
 
 ---
 
@@ -177,6 +177,6 @@ All errors return JSON with an `error` field:
 ```
 
 Common status codes:
-- `401` — Invalid or missing API key
-- `403` — Feature requires a higher tier
-- `500` — Server error (try again)
+- `401` - Invalid or missing API key
+- `403` - Feature requires a higher tier
+- `500` - Server error (try again)
