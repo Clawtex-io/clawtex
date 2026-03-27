@@ -143,7 +143,12 @@ curl -s -X POST -H "Authorization: Bearer tkr_..." https://clawtex.io/api/lesson
 
 **Rate limit:** 5 extractions per day (weekly mode). Initial extraction (no existing lessons) is unlimited.
 
-**Response:** JSON with proposed lessons for review.
+**Response:** JSON with proposed lessons in v2 format. Each lesson includes:
+- `context` - the trigger situation
+- `mistake` - background and what went wrong, with event references
+- `correct` - numbered correction steps (verifiable process)
+- `enforcement` - how the lesson is mechanically enforced
+- `source_events` - event references the lesson was extracted from
 
 ---
 

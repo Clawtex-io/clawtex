@@ -40,8 +40,12 @@ The `/api/bootstrap` endpoint returns different content based on your plan:
 
 ### Active Lessons
 [L001] When: integrating with client APIs
-  DON'T: Assume API version without checking
-  DO: Always confirm API version before starting
+  CONTEXT: Agent assumed API v2 without checking, causing rework when client was on v1. Happened twice across different projects.
+  CORRECTION:
+    1. Check the API documentation for the current version
+    2. Confirm the version with the client or their docs before writing any integration code
+    3. Pin the version in config so it cannot drift silently
+  ENFORCEMENT: Integration checklist item - version must be confirmed before any API calls are written
 
 ### Current State
 (your structured state data)
