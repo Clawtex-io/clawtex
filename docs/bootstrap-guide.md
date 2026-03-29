@@ -4,12 +4,39 @@
 
 The bootstrap snippet is a small block you add to your agent's `BOOTSTRAP.md` or system prompt. It runs at every session start, loading your agent's context from Clawtex.
 
+### Recommended Snippet (with fallback)
+
+```bash
+CLAWTEX=$(curl -sf --max-time 10 \
+  -H "Authorization: Bearer tkr_your_key" \
+  https://clawtex.io/api/bootstrap)
+
+if [ -z "$CLAWTEX" ]; then
+  echo "WARNING: Clawtex unreachable. Loading cached context."
+  CLAWTEX=$(cat ~/.clawtex/last-bootstrap.txt 2>/dev/null || echo "No cached context available. Proceed with caution.")
+else
+  mkdir -p ~/.clawtex
+  echo "$CLAWTEX" > ~/.clawtex/last-bootstrap.txt
+fi
+
+echo "$CLAWTEX"
+```
+
+This snippet:
+- Uses `curl -sf` to fail explicitly on HTTP errors (not silently)
+- Sets a 10-second timeout so sessions don't hang
+- On success: caches the response locally for fallback
+- On failure: loads the last cached response with a warning
+- If no cache exists: clear warning so the agent knows to proceed carefully
+
+### Minimal Snippet (no fallback)
+
 ```bash
 CLAWTEX=$(curl -s -H "Authorization: Bearer tkr_your_key" https://clawtex.io/api/bootstrap)
 echo "$CLAWTEX"
 ```
 
-This single call returns everything your agent needs: state, lessons, rules, recent events, and logging commands.
+This single call returns everything your agent needs: state, lessons, rules, recent events, and logging commands. However, if Clawtex is unreachable, the agent starts with no context and no warning. We recommend the fallback version above.
 
 ## Tier-Aware Responses
 
